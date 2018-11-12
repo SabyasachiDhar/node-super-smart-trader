@@ -2,7 +2,7 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
-const port = process.env.PORT || 3000; 
+const port = process.env.PORT || 3000;
 
 var app = express();
 
@@ -15,7 +15,7 @@ app.use((req, res, next) => {
     console.log(log);
 
     fs.appendFile('server.log', log + '\n', (err) => {
-        if(err){
+        if (err) {
             console.log("Unable to append to server.log");
         }
     });
@@ -34,7 +34,7 @@ hbs.registerHelper('getCurrentYear', () => {
 
 hbs.registerHelper('screamIt', (text) => {
     return text.toUpperCase();
-}); 
+});
 
 app.get('/', (req, res) => {
     res.render('home.hbs', {
@@ -46,6 +46,13 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
     res.render('about.hbs', {
         pageTitle: 'About Page',
+    });
+});
+
+app.get('/project', (req, res) => {
+    res.render('project.hbs', {
+        pageTitle: 'Projects',
+        greetings: "Welcome to Project Page"
     });
 });
 
